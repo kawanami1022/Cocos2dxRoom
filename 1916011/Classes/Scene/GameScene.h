@@ -22,8 +22,8 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __GAMESCENEÅQSCENEÅQH__
+#define __GAMESCENEÅQSCENEÅQH__
 
 #include "cocos2d.h"
 
@@ -38,7 +38,7 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(GameScene);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __GAMESCENEÅQSCENEÅQH__
