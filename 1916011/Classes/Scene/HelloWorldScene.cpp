@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #include "HelloWorldScene.h"
-
+#include "GameScene.h"
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -92,6 +92,24 @@ bool HelloWorld::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
+    startButtton_ = cocos2d::ui::Button::create("StartButton.png", "StartButton1.png", "StartButton.png");
+    startButtton_->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y - 100));
+    startButtton_->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        auto NextSnene = GameScene::create();
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            
+            Director::getInstance()->replaceScene(TransitionFade::create(0.5, NextSnene, Color3B(0,0,0)));
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+            break;
+        default:
+            break;
+        }
+        });
+
+    this->addChild(startButtton_);
     return true;
 }
 

@@ -26,7 +26,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-
+#include "ui\CocosGUI.h"
 class HelloWorld : public cocos2d::Scene
 {
 public:
@@ -41,6 +41,9 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+private:
+    cocos2d::ui::Button* startButtton_; //member of HelloWorld.
 };
 
 #endif // __HELLOWORLD_SCENE_H__
