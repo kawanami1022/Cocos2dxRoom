@@ -39,6 +39,9 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
+private:
+    cocos2d::TMXTiledMap* map_;
+    cocos2d::Layer* gameLayer_;
 };
 
 #endif // __GAMESCENEÅQSCENEÅQH__

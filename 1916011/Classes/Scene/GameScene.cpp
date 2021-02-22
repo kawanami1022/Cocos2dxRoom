@@ -85,7 +85,7 @@ bool GameScene::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("Game Scene", "fonts/Marker Felt.ttf", 24);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
@@ -99,21 +99,13 @@ bool GameScene::init()
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
+    gameLayer_ = cocos2d::Layer::create();
+    map_ = cocos2d::TMXTiledMap::create("map.tmx");
+    map_->setPosition(0, 0);
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
+    gameLayer_->addChild(map_, 2, 100);
+    this->addChild(gameLayer_);
     return true;
 }
 
