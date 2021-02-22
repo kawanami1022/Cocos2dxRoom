@@ -2,10 +2,11 @@
 #ifndef __CHARATOR_H__
 #define __CHARATOR_H__
 
-class CHARATOR :public Actor
+class CHARACTOR :public Actor
 {
 public:
-	CHARATOR();
-	~CHARATOR();
+	CHARACTOR();
+	~CHARACTOR();
+private:
 };
 #endif

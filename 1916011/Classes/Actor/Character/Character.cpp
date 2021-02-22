@@ -1,9 +1,9 @@
 #include "Character.h"
 
-CHARATOR::CHARATOR():Actor()
+CHARACTOR::CHARACTOR():Actor()
 {
 }
 
-CHARATOR::~CHARATOR()
+CHARACTOR::~CHARACTOR()
 {
 }
