@@ -108,35 +108,8 @@ bool HelloWorld::init()
             break;
         }
         });
-
-#ifdef ANIMATIOn
-
-
-
-    auto player = Sprite::create("sprites.png");
-    player->setPosition(Point(100, 100));
-    this->addChild(player);
-
-    auto cache = cocos2d::SpriteFrameCache::getInstance();
-    cache->addSpriteFramesWithFile("sprites.plist");
-    auto _animation = Animation::create();
-    for (int i = 0; i < 9; i++) {
-
-        auto str = "PrototypeHero_0" + std::to_string(i) + ".png";
-        cocos2d::SpriteFrame* player = cache->getSpriteFrameByName(str.c_str());
-        _animation->addSpriteFrame(player);
-
-    }
-
-    _animation->setDelayPerUnit(0.5f);
-    _animation->setRestoreOriginalFrame(true);
-
-    auto action = Animate::create(_animation);
-    auto anime = RepeatForever::create(action);
-    player->runAction(anime);
-#endif // ANIMATIOn
     gameLayer_ = cocos2d::Layer::create();
-    player_.reset(new Player(cocos2d::Point(100, 100), this));
+    player_.reset(new Player(cocos2d::Point(100, 100), gameLayer_));
     this->addChild(gameLayer_);
     this->addChild(startButtton_);
     return true;

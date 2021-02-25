@@ -10,10 +10,10 @@ Player::Player():CHARACTOR()
 
 Player::Player(cocos2d::Point pos, cocos2d::Node* layer)
 {
+    setPosition(pos);
     sprite_ = cocos2d::Sprite::create("sprites.png");
-    sprite_->setPosition(cocos2d::Point(100, 100));
+    sprite_->setPosition(cocos2d::Point(pos));
     layer->addChild(sprite_);
-
     auto cache = cocos2d::SpriteFrameCache::getInstance();
     cache->addSpriteFramesWithFile("sprites.plist");
     auto _animation = cocos2d::Animation::create();

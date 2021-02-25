@@ -9,7 +9,6 @@ public:
 	Player(cocos2d::Point,cocos2d::Node* layer);
 	~Player();
 	void InitAnimation();
-	cocos2d::Sprite* GetSprite();
 protected:
 	
 };

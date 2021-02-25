@@ -63,6 +63,7 @@ list(APPEND GAME_SOURCE
      Classes/Actor/Character/Character.cpp
      Classes/Actor/Character/Player/Player.cpp
      Classes/Actor/Character/Ring/Ring.cpp
+     Classes/System/SpriteManager.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -72,6 +73,7 @@ list(APPEND GAME_HEADER
      Classes/Actor/Character/Character.h
      Classes/Actor/Character/Player/Player.h
      Classes/Actor/Character/Ring/Ring.h
+     Classes/System/SpriteManager.h
      )
 
 if(ANDROID)
