@@ -6,11 +6,11 @@ class Player :public CHARACTOR
 {
 public:
 	Player();
-	Player(cocos2d::Point);
+	Player(cocos2d::Point,cocos2d::Node* layer);
 	~Player();
 	void InitAnimation();
 	cocos2d::Sprite* GetSprite();
 protected:
-	cocos2d::Sprite* sprite_;
+	
 };
 #endif

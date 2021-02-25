@@ -24,25 +24,39 @@
 
 #ifndef __GAMESCENEÅQSCENEÅQH__
 #define __GAMESCENEÅQSCENEÅQH__
-
+#include <vector>
+#include <memory>
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
+
 class Player;
+class Ring;
+
+using RingList = std::vector< std::shared_ptr<Ring>>;
 class GameScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
+    void update(float delta);
 
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 private:
     cocos2d::TMXTiledMap* map_;
     cocos2d::Layer* gameLayer_;
+    RingList ring_;
+    cocos2d::EventListenerMouse* mouse_;
+
+    bool leftFlag_=false;
+    cocos2d::ui::Button* LeftButtton_; 
+    bool rightFlag_ = false;;
+    cocos2d::ui::Button* RightButtton_;
+
+
+    // camera 
+    cocos2d::Camera* gameCamera_;
 };
 
 #endif // __GAMESCENEÅQSCENEÅQH__

@@ -21,9 +21,9 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
+#include <string>
 #include "GameScene.h"
-
+#include "Actor/Character/Ring/Ring.h"
 USING_NS_CC;
 
 Scene* GameScene::createScene()
@@ -50,34 +50,14 @@ bool GameScene::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    auto winSize = Director::getInstance()->getWinSize();
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-        "CloseNormal.png",
-        "CloseSelected.png",
-        CC_CALLBACK_1(GameScene::menuCloseCallback, this));
 
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
-        float y = origin.y + closeItem->getContentSize().height / 2;
-        closeItem->setPosition(Vec2(x, y));
-    }
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+
 
     /////////////////////////////
     // 3. add your codes below...
@@ -99,26 +79,78 @@ bool GameScene::init()
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
+
     gameLayer_ = cocos2d::Layer::create();
+    gameCamera_ = Camera::createOrthographic(winSize.width, winSize.height, -200, 1000);
+
     map_ = cocos2d::TMXTiledMap::create("map.tmx");
     map_->setPosition(0, 0);
+    gameCamera_->addChild(map_, -2, -100);
+    // create mouse
+    LeftButtton_ = 
+        cocos2d::ui::Button::create("ArrowButton/ArrowButton_00.png", "ArrowButton/ArrowButton_01.png");
+    LeftButtton_->setScaleX(-1);
+    auto ButtonSize=LeftButtton_->getNormalTextureSize();
+    LeftButtton_->setPosition(Vec2(visibleSize.width- ButtonSize.width/2-ButtonSize.width, ButtonSize.height/2));
+    LeftButtton_->setPosition(Vec2(visibleSize.width- ButtonSize.width/2-ButtonSize.width, ButtonSize.height/2));
+    LeftButtton_->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            leftFlag_ = true;
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+            leftFlag_ = false;
+            break;
+        default:
+            break;
+        }
+        });;
+    gameLayer_->addChild(LeftButtton_);
+
+    RightButtton_ =
+        cocos2d::ui::Button::create("ArrowButton/ArrowButton_00.png", "ArrowButton/ArrowButton_01.png");
+    RightButtton_->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            rightFlag_ = true;
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+            rightFlag_ = false;
+            break;
+        default:
+            break;
+        }
+       });;
+    ButtonSize = RightButtton_->getNormalTextureSize();
+    RightButtton_->setPosition(Vec2(visibleSize.width - ButtonSize.width / 2, ButtonSize.height / 2));
+
+    gameLayer_->addChild(RightButtton_);
+    gameLayer_->addChild(gameCamera_);
+    gameCamera_->setCameraFlag(CameraFlag::USER1);
 
 
-    gameLayer_->addChild(map_, 2, 100);
+
     this->addChild(gameLayer_);
+
+    this->scheduleUpdate();
     return true;
 }
 
-
-void GameScene::menuCloseCallback(Ref* pSender)
+void GameScene::update(float delta)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+    auto gameCameraPos = gameCamera_->getPosition();
+    if (rightFlag_)
+    {
+        gameCameraPos.x -= 200* delta;
+    }
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
+    if (leftFlag_)
+    {
+        gameCameraPos.x += 200 * delta;
+    }
+    gameCamera_->setPosition(gameCameraPos);
 }
+
+

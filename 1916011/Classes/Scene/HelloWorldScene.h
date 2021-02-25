@@ -27,6 +27,7 @@
 
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
+#include "Actor/Character/Player/Player.h"
 class HelloWorld : public cocos2d::Scene
 {
 public:
@@ -41,9 +42,16 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+    cocos2d::Vector<cocos2d::SpriteFrame*> getAnimation(const char* format, int count);
 
 private:
     cocos2d::ui::Button* startButtton_; //member of HelloWorld.
+
+    std::shared_ptr<Player> player_;
+
+
+    cocos2d::Layer *gameLayer_;
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
