@@ -64,6 +64,9 @@ list(APPEND GAME_SOURCE
      Classes/Actor/Character/Player/Player.cpp
      Classes/Actor/Character/Ring/Ring.cpp
      Classes/System/SpriteManager.cpp
+     Classes/System/InputEvent/InputEvent.cpp
+     Classes/System/InputEvent/MouseEvent/MouseEvent.cpp
+     Classes/System/InputEvent/TouchEvent/TouchEvent.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -74,6 +77,9 @@ list(APPEND GAME_HEADER
      Classes/Actor/Character/Player/Player.h
      Classes/Actor/Character/Ring/Ring.h
      Classes/System/SpriteManager.h
+     Classes/System/InputEvent/InputEvent.h
+     Classes/System/InputEvent/MouseEvent/MouseEvent.h
+     Classes/System/InputEvent/TouchEvent/TouchEvent.h
      )
 
 if(ANDROID)

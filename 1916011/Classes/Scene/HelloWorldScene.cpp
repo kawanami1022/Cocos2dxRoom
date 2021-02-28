@@ -107,7 +107,7 @@ bool HelloWorld::init()
         default:
             break;
         }
-        });
+    });
     gameLayer_ = cocos2d::Layer::create();
     player_.reset(new Player(cocos2d::Point(100, 100), gameLayer_));
     this->addChild(gameLayer_);

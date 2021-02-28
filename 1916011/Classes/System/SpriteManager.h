@@ -33,7 +33,12 @@ public:
 		return (*hInstance_);
 	}
 
+
+
+
 private:
+
+	
 	std::unordered_map<std::string,cocos2d::Sprite*> spriteList_;
 	SpriteManager();
 	~SpriteManager();
